@@ -1,0 +1,21 @@
+.loading{
+    color: aquamarine;
+    font-size: 50px;
+}
+.favorites{
+    display: flex;
+    gap: 25px;
+    overflow: auto;
+    margin-bottom: 30px;
+}
+.items{
+    display: flex;
+    gap:25px;
+    margin-bottom: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.favorites-wrapper{
+    flex-direction: column;
+    display: flex;
+}
