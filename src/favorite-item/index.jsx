@@ -1,15 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ThemeContext } from '../App';
 import './style.css';
 const FavoriteItem = (props) => {
     const { id, image, removeformFavorites, title } = props;
-
+    const { theme } = useContext(ThemeContext)
     return (
         <div key={id} className="favorite-item">
             <div>
                 <img src={image} alt='image of recipe' />
             </div>
-            <p>{title}</p>
-            <button type='button' onClick={removeformFavorites}>Remove fromfavorites</button>
+            <p style={theme ? { color: "#12343b" } : {}}>{title}</p>
+            <button style={theme ? { backgroundColor: "#12343b" } : {}} type='button' onClick={removeformFavorites}>Remove fromfavorites</button>
         </div>
     )
 }
