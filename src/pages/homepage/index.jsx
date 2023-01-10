@@ -1,9 +1,25 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import './style.css'
 import Search from '../../component/search';
 import RecipeItem from '../../recipe-item';
 import FavoriteItem from '../../favorite-item';
+const reducer = (state, action) => {
+    switch (action.type) {
+        case "filterFavorites":
+            console.log(action);
+            return {
+                ...state,
+                filteredValue: action.value
+            };
+
+        default:
+            return state;
+    }
+}
+const initialState = {
+    filteredValue: ''
+}
 const Homepage = () => {
     //loading state
     const [loadingState, setLoadingState] = useState(false)
@@ -14,6 +30,10 @@ const Homepage = () => {
     const [apiCalledSucess, setApiCalledSucess] = useState(false)
     //favorites data state
     const [favorites, setFavorites] = useState([])
+
+    //use reducer
+
+    const [filteredstate, dispatch] = useReducer(reducer, initialState);
     const getDataFromSearchComponent = (getdata) => {
         //keep the loading state as true before we are calling the api
         setLoadingState(true)
@@ -63,8 +83,10 @@ const Homepage = () => {
         // console.log(extractFavoritesFromLocalStoragePageLoad)
         setFavorites(extractFavoritesFromLocalStoragePageLoad)
     }, []);
-    console.log(apiCalledSucess);
+    console.log(filteredstate, "filteredstate");
+    const filteredFavoritesItems = favorites.filter(item => item.title.toLowerCase().includes(filteredstate.filteredValue.toLowerCase()))
     return (
+
         <div className='homepage'>
             <Search getDataFromSearchComponent={getDataFromSearchComponent}
                 apiCalledSucess={apiCalledSucess}
@@ -72,10 +94,16 @@ const Homepage = () => {
             {/* show favorites items */}``
             <div className="favorites-wrapper">
                 <h1 className='favorites-title'>Favorites</h1>
+                <div className="search-favorites">
+                    <input
+                        onChange={(event) =>
+                            dispatch({ type: "filterFavorites", value: event.target.value })}
+                        value={filteredstate.filteredValue} name='searchfavorites' placeholder='search favorites' />
+                </div>
                 <div className="favorites">
                     {
-                        favorites && favorites.length > 0 ?
-                            favorites.map(item => (
+                        filteredFavoritesItems && filteredFavoritesItems.length > 0 ?
+                            filteredFavoritesItems.map(item => (
                                 <FavoriteItem
                                     removeformFavorites={() => removeformFavorites(item.id)}
                                     id={item.id}

@@ -1,21 +1,25 @@
-.loading{
-    color: aquamarine;
-    font-size: 50px;
+.loading {
+  color: aquamarine;
+  font-size: 50px;
 }
-.favorites{
-    display: flex;
-    gap: 25px;
-    overflow: auto;
-    margin-bottom: 30px;
+.favorites {
+  display: flex;
+  gap: 25px;
+  overflow: auto;
+  margin-bottom: 30px;
 }
-.items{
-    display: flex;
-    gap:25px;
-    margin-bottom: 30px;
-    justify-content: center;
-    flex-wrap: wrap;
+.items {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-.favorites-wrapper{
-    flex-direction: column;
-    display: flex;
+.favorites-wrapper {
+  flex-direction: column;
+  display: flex;
+}
+.search-favorites input {
+  padding: 10px 50px;
+  margin-bottom: 30px;
 }
