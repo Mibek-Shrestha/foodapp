@@ -2,6 +2,18 @@
   color: aquamarine;
   font-size: 50px;
 }
+.loading,
+.no-items {
+  font-size: 40px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.favorites-title {
+  color: #fa6400;
+  font-weight: 700;
+  font-size: 35px;
+  margin: 12px 0 12px 0;
+}
 .favorites {
   display: flex;
   gap: 25px;

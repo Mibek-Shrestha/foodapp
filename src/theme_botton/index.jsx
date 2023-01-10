@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { ThemeContext } from '../App';
 const ThemeButton = () => {
     const { theme, setTheme } = useContext(ThemeContext)
-    console.log(theme, setTheme)
+    // console.log(theme, setTheme)
     return (
 
         < button style={theme ? { backgroundColor: '#12443b' } : {}}

@@ -7,7 +7,7 @@ import FavoriteItem from '../../favorite-item';
 const reducer = (state, action) => {
     switch (action.type) {
         case "filterFavorites":
-            console.log(action);
+            // console.log(action);
             return {
                 ...state,
                 filteredValue: action.value
@@ -78,13 +78,14 @@ const Homepage = () => {
         localStorage.setItem('favorites', JSON.stringify(cpyFavorites));
     }
     useEffect(() => {
-        console.log('run only once');
-        const extractFavoritesFromLocalStoragePageLoad = JSON.parse(localStorage.getItem('favorites'));
+        // console.log('run only once');
+        const extractFavoritesFromLocalStoragePageLoad = JSON.parse(localStorage.getItem('favorites') || []);
         // console.log(extractFavoritesFromLocalStoragePageLoad)
         setFavorites(extractFavoritesFromLocalStoragePageLoad)
     }, []);
-    console.log(filteredstate, "filteredstate");
-    const filteredFavoritesItems = favorites.filter(item => item.title.toLowerCase().includes(filteredstate.filteredValue.toLowerCase()))
+    // console.log(filteredstate, "filteredstate");
+    const filteredFavoritesItems = favorites && favorites.length > 0 ? favorites.filter(item => item.title.toLowerCase().includes(filteredstate.filteredValue.toLowerCase())
+    ) : []
     return (
 
         <div className='homepage'>
@@ -101,6 +102,10 @@ const Homepage = () => {
                         value={filteredstate.filteredValue} name='searchfavorites' placeholder='search favorites' />
                 </div>
                 <div className="favorites">
+                    {
+                        !filteredFavoritesItems.length && <div
+                            style={{ display: "flex", width: "100%", justifyContent: "center" }} className='no-items' >No favorites added yet</div>
+                    }
                     {
                         filteredFavoritesItems && filteredFavoritesItems.length > 0 ?
                             filteredFavoritesItems.map(item => (
@@ -129,6 +134,10 @@ const Homepage = () => {
                         title={item.title}
                         item={item} />)
                     : null}
+                {/* map through al the recipes */}
+                {
+                    !loadingState && !recipes.length && <div className='no-items'>No recipes found</div>
+                }
             </div>
 
         </div>
